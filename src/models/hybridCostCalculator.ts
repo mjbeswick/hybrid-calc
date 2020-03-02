@@ -30,29 +30,29 @@ export enum EvEconomyUnits {
 };
 
 export class HybridCostCalculator {
-  fuelCost = {
+  public fuelCost = {
     units: FuelCostUnits.perGallon,
     value: 0,
   };
 
-  electricityCost = {
+  public electricityCost = {
     units: ElectricityCostUnits.perKWh,
     value: 0
   };
 
-  annualDistance = {
+  public annualDistance = {
     units: DistanceUnits.miles,
     value: 0,
   };
 
-  petrolVehicle = {
+  public petrolVehicle = {
     economyFuel: {
       units: FuelEconomyUnits.milesPerGallon,
       value: 0.0
     }
   };
 
-  hybridVehicle = {
+  public hybridVehicle = {
     economyFuel: {
       units: FuelEconomyUnits.milesPerGallon,
       value: 0.0
@@ -65,15 +65,15 @@ export class HybridCostCalculator {
     fuelToEvMax: 0.0
   };
 
-  getFuelCostPerGallon() {
+  private getFuelCostPerGallon() {
     return this.fuelCost.units === FuelCostUnits.perGallon ? this.fuelCost.value : this.fuelCost.value / LitresPerGallon
   }
 
-  getPnnualDistanceMiles() {
+  private getPnnualDistanceMiles() {
     return this.annualDistance.units === DistanceUnits.miles ? this.annualDistance.value : this.annualDistance.value / KmPerMile
   }
 
-  getFuelEconomyMpg(units: FuelEconomyUnits, value: number) {
+  private getFuelEconomyMpg(units: FuelEconomyUnits, value: number) {
     switch (units) {
       case FuelEconomyUnits.milesPerGallon:
         return value
@@ -89,11 +89,11 @@ export class HybridCostCalculator {
     }
   }
 
-  getEvEconomyMkwh(units: EvEconomyUnits, value: number) {
+  private getEvEconomyMkwh(units: EvEconomyUnits, value: number) {
     return units === EvEconomyUnits.milesPerKwh ? value : value / KmPerMile
   }
 
-  calculate() {
+  public calculate() {
     const fuelCostPerGallon = this.getFuelCostPerGallon()
     const electricityCostPerKwh = this.electricityCost.units
     const annualDistanceMiles = this.getPnnualDistanceMiles()
